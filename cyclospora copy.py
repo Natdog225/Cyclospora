@@ -44,13 +44,16 @@ class ScrollingText:
             self.y = 0
 
     def draw(self, screen):
-        # screen.blit(self.text_surface, (self.screen_width // 2 - self.text_surface.get_width() // 2, self.y))
-        for i, text_surface in enumerate(self.text_surfaces): surface.blit(text_surface, (10, self.y + i * self.line_spacing))
+        screen.blit(self.text_surface, (self.screen_width // 2 - self.text_surface.get_width() // 2, self.y))
+
 
 def start_game():
     # global current_scene, player, enemy, battle_turn, selected_action, battle_actions, screen, font, text_color, screen_width, screen_height, clock
-    pygame.init()
-    pygame.mixer.init()
+    try:
+        pygame.init()
+        pygame.mixer.init()
+    except pygame.error as e:
+        print(f"Error initializing Pygame or mixer: {e}") sys.exit(1)
 
     screen_width = 800
     screen_height = 600
@@ -71,7 +74,7 @@ def start_game():
     medieval_time_bg = pygame.image.load("images/CastleBridge.jpg").convert()
     red_district_bg = pygame.image.load("images/RedDistrict.jpg").convert()
     Lexington_bg = pygame.image.load("images/Lexington.jpg").convert()
-    WWII-bg = pygame.image.load("images/WWII-bg.jpg").convert()
+    wwii = pygame.image.load("images/WWII-soldier.jpg").convert()
     Alien = pygame.image.load("images/Alien.jpg").convert()
     AlienPlot = pygame.image.load("images/AlienPlot.jpg").convert()
 
@@ -81,29 +84,32 @@ def start_game():
     medieval_time_bg = pygame.transform.scale(medieval_time_bg, (screen_width, screen_height))
     red_district_bg = pygame.transform.scale(red_district_bg, (screen_width, screen_height))
     Lexington_bg = pygame.transform.scale(Lexington_bg, (screen_width, screen_height))
-    WWII-bg = pygame.transform.scale(WWII-bg, (screen_width, screen_height))
+    wwii_bg = pygame.transform.scale(wwii_bg, (screen_width, screen_height))
     Alien = pygame.transform.scale(Alien, (screen_width, screen_height))
     AlienPlot = pygame.transform.scale(AlienPlot, (screen_width, screen_height))
 
 
 
     # Load sounds
-    intro_music = pygame.mixer.Sound("Ambience/ObservingTheStar.ogg")
-    stone_age_music = pygame.mixer.Sound("Ambience/caveman-bg.ogg")
-    battle_music = pygame.mixer.Sound("Ambience/ST_1_Fight(wave).wav")
-    club_hit_sound = pygame.mixer.Sound('Sounds/CyclosporaSFX/Bonk Sound Effect.mp3')
-    castle_music = pygame.mixer.Sound("Ambience/Alert! Outsider!.mp3")
-    knight_music = pygame.mixer.Sound("Ambience/ST_1_Fight(mp3^320).mp3")
-    red_district_music = pygame.mixer.Sound("Ambience/Socapex - Tokyo Chase.mp3")
-    Ninja_music = pygame.mixer.Sound("Ambience/Theme of &#039;&#039;Ninja of A Great Sausage&#039;&#039;.ogg")
-    Lexington_music = pygame.mixer.Sound("Ambience/civil-war-fanfares.mp3")
-    Concord_soldier_music = pygame.mixer.Sound("Ambience/battle-march-action-loop.mp3")
-    WWII_music = pygame.mixer.Sound("Ambience/warzone.mp3")
-    Soldier_music = pygame.mixer.Sound("images/Soldier.mp3")
-    
-    # Load background music
-    pygame.mixer.music.load("Ambience/ObservingTheStar.ogg")
-    pygame.mixer.music.play(-1)
+    try:
+        intro_music = pygame.mixer.Sound("Ambience/ObservingTheStar.ogg")
+        stone_age_music = pygame.mixer.Sound("Ambience/caveman-bg.ogg")
+        battle_music = pygame.mixer.Sound("Ambience/ST_1_Fight(wave).wav")
+        club_hit_sound = pygame.mixer.Sound('Sounds/CyclosporaSFX/Bonk Sound Effect.mp3')
+        castle_music = pygame.mixer.Sound("Ambience/Alert! Outsider!.mp3")
+        knight_music = pygame.mixer.Sound("Ambience/ST_1_Fight(mp3^320).mp3")
+        red_district_music = pygame.mixer.Sound("Ambience/Socapex - Tokyo Chase.mp3")
+        Ninja_music = pygame.mixer.Sound("Ambience/Theme of &#039;&#039;Ninja of A Great Sausage&#039;&#039;.ogg")
+        Lexington_music = pygame.mixer.Sound("Ambience/civil-war-fanfares.mp3")
+        Concord_soldier_music = pygame.mixer.Sound("Ambience/battle-march-action-loop.mp3")
+        wwii_music = pygame.mixer.Sound("Ambience/warzone.mp3")
+        Soldier_music = pygame.mixer.Sound("images/Soldier.mp3")
+
+        # Load background music
+        pygame.mixer.music.load("Ambience/ObservingTheStar.ogg")
+        pygame.mixer.music.play(-1)
+    except pygame.error as e:
+        print(f"Error loading sound files: {e}")
 
     # Text-related variables
     text_lines = [
@@ -163,7 +169,7 @@ def start_game():
         "(You're stomach still hurts from that pie you ate. But you feel an insatuated hunger)",
         "'Can I get some food please?'(You ask a vendor, she clearly doesn't understand you)",
         "'Well damn...'",
-        "'Well maybe if I...',
+        "Well maybe if I...",
        "(You start to rummage your pockets and pull out your wallet. The vendor starts to panic)",
         "(You gaze to see what she's fretting about. As you try to see where your gaze ends, you realize it's the weapons you've collected along the way. )",
         "(You're shocked, and start explaining that you mean no harm, but fail)",
@@ -198,7 +204,7 @@ def start_game():
         'What is going on?!',
         "Alien: 'Do not attempt to resist. Your kind has brought this upon yourselves. In the future, humans initiated a genocide against my people. I lost my arms in that war. Now, you will pay for your crimes.'",
         "(You feel a surge of panic but try to think of a way out.)",
-        'Genocide? I... I had no idea. There must be another way. I can help you without... without this.'"),
+        'Genocide? I... I had no idea. There must be another way. I can help you without... without this.',
         "(The Alien's eyes narrow, filled with anger and pain.)",
         "Alien: 'Help?! You are the one that needs help! Aren't You wondering about the pain and circumstances that you are experiencing?'",
         "(The alien laughs)",
@@ -257,8 +263,11 @@ def start_game():
                     selected_action = (selected_action - 1) % len(battle_actions)
                 elif event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
                     handle_battle_action()
+        intro_text.update()
+        intro_text.draw(screen)
 
         # 2. Update game state
+    def update_game_state(self):
         if current_scene == "main_menu":
             main_menu_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
         elif current_scene == "intro":
@@ -281,15 +290,15 @@ def start_game():
                 battle_turn = "player"
     #need outro screen
 
-        # Move the rectangle
-        rect_x += rect_speed_x
-        rect_y += rect_speed_y
+        # # Move the rectangle
+        # rect_x += rect_speed_x
+        # rect_y += rect_speed_y
 
-        # Bounce the rectangle off the edges
-        if rect_x < 0 or rect_x + rect_width > screen_width:
-            rect_speed_x = -rect_speed_x
-        if rect_y < 0 or rect_y + rect_height > screen_height:
-            rect_speed_y = -rect_speed_y
+        # # Bounce the rectangle off the edges
+        # if rect_x < 0 or rect_x + rect_width > screen_width:
+        #     rect_speed_x = -rect_speed_x
+        # if rect_y < 0 or rect_y + rect_height > screen_height:
+        #     rect_speed_y = -rect_speed_y
 
         
         # 3. Render
@@ -494,6 +503,25 @@ def next_scene():
         # Game won!
         pass  # Implement victory screen here
 
+def show_outro_screen():
+    global running
+    screen.fill((0, 0, 0))
+    outro_text = ScrollingText("Congratulations, you've won the game!", font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
+
+    while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.KEYDOWN:
+            pygame.quit()
+            sys.exit()  # End the game
+
+    outro_text.update()
+    screen.fill((0, 0, 0))
+    outro_text.draw(screen)
+    pygame.display.flip()
+    clock.tick(60)
 
 if __name__ == "__main__":
     start_game()
