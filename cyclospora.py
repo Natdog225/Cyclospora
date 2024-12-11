@@ -385,7 +385,7 @@ def start_game():
         },
     "stone_age": {
         "text_lines": [
-            "(There's an unfamiliar cold hard surface as you wake up)"
+            "(There's an unfamiliar cold hard surface as you wake up)",
             "This couldn't be your bed...)",
             "Oww, my back...",
             "(As you start adjusting yourself to your surroundings"
@@ -403,15 +403,15 @@ def start_game():
     },
     "medieval_time": {
        "text_lines": [
-    "(Your head is pounding and your arms and legs are aching)"
-    "Damn it...(You hold your head in your hands)"
-    "(As you lay in pain from the unexpected battle..."
-    "the sound of metal clanging together gets louder and louder)"
-    "HARK!! Who goes there?!"
-    "(You hurriedly stand up and adrenaline courses through your veins."
-    "As you look around, you notice it sure does look like a...a...)"
-    "Renaissance fair...?"
-    "Please, not again"
+    "(Your head is pounding and your arms and legs are aching)",
+    "Damn it...(You hold your head in your hands)",
+    "(As you lay in pain from the unexpected battle...",
+    "the sound of metal clanging together gets louder and louder)",
+    "HARK!! Who goes there?!",
+    "(You hurriedly stand up and adrenaline courses through your veins.",
+    "As you look around, you notice it sure does look like a...a...)",
+    "Renaissance fair...?",
+    "Please, not again",
     ],
        "background": medieval_time_bg,
             "music": castle_music,
@@ -446,13 +446,21 @@ def start_game():
     },
     "WWII": {
     "text_lines": [
-        "(You quickly put your weapon away, back up and sheathe it and apologize profusely to the lady and wander away from the body you just left in the street.)",
-        "(After panic walking away from the murder you just committed. You find another vender and ask about a nearby inn. She seems to understand and points you in the direction of an Inn)",
-        "(You thank her and start walking towards the Inn, as you walk you begin to feel light-headed and blackout again.)",
-        "(You awake and look around, you notice a city-scape bombed to a point it resembled rubble more than a city.)",
+        "(You quickly put your weapon away, back up and sheathe it",
+        "you apologize profusely to the lady...She aint havin it",
+        "You wander away from the body you just left in the street.)",
+        "(After panic walking away from the murder you just committed.",
+        "You find another vender and ask about a nearby inn.",
+        "She seems to understand and points you in the direction of an Inn)",
+        "(You thank her and start walking towards the Inn"
+        "as you walk you begin to feel light-headed and blackout again.)",
+        "(You awake and look around, you notice a city-scape..",
+        "bombed to a point it resembled rubble more than a city.)",
         "Halt! You there!",
         "(You stop and slowly turn around)",
-        "(You are face to face with a Nazi soldier, obviously there isn't much to say at this point, you look to your right and find a discarded rifle, pick it up and point)",
+        "(You are face to face with a Nazi soldier,",
+        "obviously there isn't much thinking to do",
+        "you look to your right and find a discarded rifle, pick it up and point)",
     ],
     "background": WWII_bg,
     "music": WWII_music,
