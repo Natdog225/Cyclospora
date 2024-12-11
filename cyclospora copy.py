@@ -72,6 +72,9 @@ def load_scene(scene_name, screen, font, text_color, screen_width, screen_height
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    return
 
         scrolling_text.update()
         
@@ -86,7 +89,7 @@ def load_scene(scene_name, screen, font, text_color, screen_width, screen_height
         if scrolling_text.is_finished():
             scrolling_text.y = screen_height
             return
-        
+
 def choose_enemy(current_scene):
     if current_scene == "stone_age":
         return Caveman()
@@ -168,8 +171,6 @@ def stone_age_screen(screen, font, text_color, screen_width, screen_height, cloc
         pygame.display.flip()
         clock.tick(60)
 
-    # Battle ended, move to the next scene
-    next_scene()
 
 def medieval_time_screen(screen, font, text_color, screen_width, screen_height, clock, medieval_time_text_lines):
     global current_scene
@@ -197,7 +198,7 @@ def medieval_time_screen(screen, font, text_color, screen_width, screen_height, 
 
 def red_district_screen(screen, font, text_color, screen_width, screen_height, clock, reddistrict_text_lines):
     global current_scene, player, enemy
-    # screen.fill((0, 0, 0))
+    # # screen.fill((0, 0, 0))
     red_district_text = ScrollingText('\n'.join(reddistrict_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
     
     screen.blit(red_district_bg, (0, 0))
@@ -330,7 +331,7 @@ def handle_battle_action():
 def execute_battle_action(action_index):
     global battle_turn, current_scene
     if action_index == 0:
-        weapon = club  # Example: use the club weapon
+        weapon = sword  # Example: use the club weapon
         player.attack(enemy, weapon)
     elif action_index == 1:
         if random.random() < player.special["Luck"] * 0.1:
@@ -486,7 +487,7 @@ def start_game():
        "background": medieval_time_bg,
             "music": castle_music,
     },
-    "reddistrict": {
+    "red_district": {
         "text_lines": [
         "(You): WHY IS THIS HAPPENING TO ME?!",
         "You start trembling with anger and feelings of helplessness...",
@@ -510,7 +511,7 @@ def start_game():
         "background": red_district_bg,
             "music": red_district_music,
     },
-    "wwii": {
+    "WWII": {
     "text_lines": [
         "You awake and look around, you notice plains of grass and",
         "tents vicarously placed on the end that you're in and the opposite end.",
@@ -522,7 +523,7 @@ def start_game():
         "'(You): ...guns...'",
         "You need too tread carefully or there will be a bullet between your eyes."
     ],
-    "backround": WWII_bg,
+    "background": WWII_bg,
     "music": WWII_music,
     },
     "modern_times": {
@@ -541,7 +542,7 @@ def start_game():
         "Soldier: You better have a good reason, or you'll be answering to the higher-ups.'"
         '(You): Okay what do I do now?...'
     ],
-    "backround": Lexington_bg,
+    "background": Lexington_bg,
     "music": Soldier_music,
     },
     "mars": {
@@ -589,7 +590,7 @@ def start_game():
         "Alien: I'd rather you be in as much pain as possible'",
         "(The alien is getting ready to probe you, what shall you do?)"
     ],
-    "backround": AlienPlot,
+    "background": AlienPlot,
     "music": battle_music,
     },
 
@@ -634,17 +635,16 @@ def start_game():
 
         # 2. Update game state
         if current_scene == "main_menu":
-            next_scene = main_menu_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
-            if next_scene:
-                current_scene = next_scene
+            next_scene_name = main_menu_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            if next_scene_name:
+                current_scene = next_scene_name
         elif current_scene in scenes:
             load_scene(current_scene, screen, font, text_color, screen_width, screen_height, clock, **scenes[current_scene])
             if current_scene == "stone_age":
                 enemy = Caveman()
-                stone_age_screen(screen, font, text_color, player, enemy, clock)
             elif current_scene == "medieval_time":
                 enemy = Knight()
-            elif current_scene == "reddistrict":
+            elif current_scene == "red_district":
                 enemy = Ninja()
             elif current_scene == "WWII":
                 enemy = Nazi_Soldier()
