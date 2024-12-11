@@ -1,4 +1,4 @@
-
+import os
 import random
 import time
 from PIL import Image
@@ -46,6 +46,7 @@ class ScrollingText:
     def draw(self, screen):
         screen.blit(self.text_surface, (self.screen_width // 2 - self.text_surface.get_width() // 2, self.y))
 
+    os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 def start_game():
     # global current_scene, player, enemy, battle_turn, selected_action, battle_actions, screen, font, text_color, screen_width, screen_height, clock
@@ -53,7 +54,8 @@ def start_game():
         pygame.init()
         pygame.mixer.init()
     except pygame.error as e:
-        print(f"Error initializing Pygame or mixer: {e}") sys.exit(1)
+        print(f"Error initializing Pygame or mixer: {e}")
+        sys.exit(1)
 
     screen_width = 800
     screen_height = 600
@@ -74,7 +76,7 @@ def start_game():
     medieval_time_bg = pygame.image.load("images/CastleBridge.jpg").convert()
     red_district_bg = pygame.image.load("images/RedDistrict.jpg").convert()
     Lexington_bg = pygame.image.load("images/Lexington.jpg").convert()
-    wwii = pygame.image.load("images/WWII-soldier.jpg").convert()
+    wwii_bg = pygame.image.load("images/WWII-soldier.jpg").convert()
     Alien = pygame.image.load("images/Alien.jpg").convert()
     AlienPlot = pygame.image.load("images/AlienPlot.jpg").convert()
 
@@ -87,7 +89,6 @@ def start_game():
     wwii_bg = pygame.transform.scale(wwii_bg, (screen_width, screen_height))
     Alien = pygame.transform.scale(Alien, (screen_width, screen_height))
     AlienPlot = pygame.transform.scale(AlienPlot, (screen_width, screen_height))
-
 
 
     # Load sounds
@@ -103,11 +104,15 @@ def start_game():
         Lexington_music = pygame.mixer.Sound("Ambience/civil-war-fanfares.mp3")
         Concord_soldier_music = pygame.mixer.Sound("Ambience/battle-march-action-loop.mp3")
         wwii_music = pygame.mixer.Sound("Ambience/warzone.mp3")
-        Soldier_music = pygame.mixer.Sound("images/Soldier.mp3")
+        Soldier_music = pygame.mixer.Sound("Ambience/Soldier.mp3")
+        Mars_music = pygame.mixer.Sound("Ambience/Zander Noriega - Perpetual Tension.mp3")
+        Alien_music = pygame.mixer.Sound("Ambience/Orbital Colossus.mp3")
+        outro_music = pygame.mixer.Sound("Ambience/Desperation sets in.mp3")
 
         # Load background music
         pygame.mixer.music.load("Ambience/ObservingTheStar.ogg")
         pygame.mixer.music.play(-1)
+
     except pygame.error as e:
         print(f"Error loading sound files: {e}")
 
@@ -270,20 +275,31 @@ def start_game():
     def update_game_state(self):
         if current_scene == "main_menu":
             main_menu_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            intro_music.play(-1)
         elif current_scene == "intro":
             intro_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            intro_music.play(-1)
         elif current_scene == "stone_age":
             stone_age_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            stone_age_music.play(-1)
         elif current_scene == "medieval_time":
             medieval_time_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            medieval_music.play(-1)
         elif current_scene == "red_district":
             red_district_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            red_district_music.play(-1)
         elif current_scene == "wwii":
             wwii_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            wwii_music.play(-1)
         elif current_scene == "modern_times":
             modern_times_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            modern_times_music.play(-1)
         elif current_scene == "mars":
             mars_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            Mars_music.play(-1)
+        elif current_scene == "outro":
+            outro_screen(screen, font, text_color, screen_width, screen_height, clock, main_menu_image, menu_options, selected_option)
+            outro_music.play(-1)
         if current_scene in ["stone_age", "medieval_time", "red_district", "wwii", "modern_times", "mars"]:
             if enemy is None or enemy.hp <= 0:
                 enemy = choose_enemy(current_scene)
@@ -412,6 +428,10 @@ def wwii_screen(screen, font, text_color, screen_width, screen_height, clock, ww
     global current_scene, player, enemy
     screen.fill((0, 0, 0))
     wwii_text = ScrollingText('\n'.join(wwii_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
+    
+    screen.blit(, (0, 0))
+    Mars_music.play(-1)
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -431,6 +451,10 @@ def modern_times_screen(screen, font, text_color, screen_width, screen_height, c
     global current_scene, player, enemy
     screen.fill((0, 0, 0))
     modern_times_text = ScrollingText('\n'.join(modern_times_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
+    
+    screen.blit(Lexington_bg, (0, 0))
+    Mars_music.play(-1)
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -440,7 +464,7 @@ def modern_times_screen(screen, font, text_color, screen_width, screen_height, c
                 current_scene = "modern_times"
                 return
         modern_times_text.update()
-        screen.fill((0, 0, 0))
+        # screen.fill((0, 0, 0))
         modern_times_text.draw(screen)
         pygame.display.flip()
         clock.tick(60)
@@ -450,6 +474,10 @@ def mars_screen(screen, font, text_color, screen_width, screen_height, clock, ma
     global current_scene, player, enemy
     screen.fill((0, 0, 0))
     mars_text = ScrollingText('\n'.join(mars_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
+    
+    screen.blit(AlienPlot_bg, (0, 0))
+    Mars_music.play(-1)
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -459,10 +487,11 @@ def mars_screen(screen, font, text_color, screen_width, screen_height, clock, ma
                 current_scene = "mars"
                 return
         mars_text.update()
-        screen.fill((0, 0, 0))
+        # screen.fill((0, 0, 0))
         mars_text.draw(screen)
         pygame.display.flip()
         clock.tick(60)
+
     enemy = Alien()
 
 
@@ -509,19 +538,19 @@ def show_outro_screen():
     outro_text = ScrollingText("Congratulations, you've won the game!", font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
 
     while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.KEYDOWN:
-            pygame.quit()
-            sys.exit()  # End the game
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                pygame.quit()
+                sys.exit()  # End the game
 
-    outro_text.update()
-    screen.fill((0, 0, 0))
-    outro_text.draw(screen)
-    pygame.display.flip()
-    clock.tick(60)
+        outro_text.update()
+        screen.fill((0, 0, 0))
+        outro_text.draw(screen)
+        pygame.display.flip()
+        clock.tick(60)
 
 if __name__ == "__main__":
     start_game()
