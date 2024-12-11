@@ -107,6 +107,10 @@ def choose_enemy(current_scene):
 def intro_screen(screen, font, text_color, screen_width, screen_height, clock, text_lines):
     global current_scene
     intro_text = ScrollingText('\n'.join(text_lines), font, text_color, screen_width, screen_height, scroll_speed=2, line_spacing=180)
+    
+    screen.blit(intro_image, (0, 0))
+    intro_music.play(-1)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -124,7 +128,7 @@ def intro_screen(screen, font, text_color, screen_width, screen_height, clock, t
 
 def stone_age_screen(screen, font, text_color, screen_width, screen_height, clock, stone_age_text_lines):
     global current_scene, enemy, battle_turn, selected_action, battle_actions
-    screen.fill((0, 0, 0))
+    # screen.fill((0, 0, 0))
     stone_age_text = ScrollingText('\n'.join(stone_age_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
 
     # Initialize battle variables within this scene
@@ -132,6 +136,10 @@ def stone_age_screen(screen, font, text_color, screen_width, screen_height, cloc
     selected_action = 0
     battle_turn = "player"
     enemy = choose_enemy(current_scene)  # Initialize the enemy here
+
+    screen.blit(stone_age_bg, (0, 0))
+    stone_age_music.play(-1)
+
 
     while True:
         for event in pygame.event.get():
@@ -167,8 +175,12 @@ def stone_age_screen(screen, font, text_color, screen_width, screen_height, cloc
 
 def medieval_time_screen(screen, font, text_color, screen_width, screen_height, clock, medieval_time_text_lines):
     global current_scene
-    screen.fill((0, 0, 0))
+    # screen.fill((0, 0, 0))
     medieval_time_text = ScrollingText('\n'.join(medieval_time_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
+    
+    screen.blit(medieval_time_bg, (0, 0))
+    castle_music.play(-1)
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -187,8 +199,12 @@ def medieval_time_screen(screen, font, text_color, screen_width, screen_height, 
 
 def red_district_screen(screen, font, text_color, screen_width, screen_height, clock, reddistrict_text_lines):
     global current_scene, player, enemy
-    screen.fill((0, 0, 0))
+    # screen.fill((0, 0, 0))
     red_district_text = ScrollingText('\n'.join(reddistrict_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
+    
+    screen.blit(red_district_bg, (0, 0))
+    red_district_music.play(-1)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -205,8 +221,12 @@ def red_district_screen(screen, font, text_color, screen_width, screen_height, c
 
 def wwii_screen(screen, font, text_color, screen_width, screen_height, clock, wwii_text_lines):
     global current_scene, player, enemy
-    screen.fill((0, 0, 0))
+    # screen.fill((0, 0, 0))
     wwii_text = ScrollingText('\n'.join(wwii_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
+    
+    screen.blit(wwii_bg (0, 0))
+    wwii_music.play(-1)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -223,8 +243,12 @@ def wwii_screen(screen, font, text_color, screen_width, screen_height, clock, ww
 
 def modern_times_screen(screen, font, text_color, screen_width, screen_height, clock, modern_times_text_lines):
     global current_scene, player, enemy
-    screen.fill((0, 0, 0))
+    # screen.fill((0, 0, 0))
     modern_times_text = ScrollingText('\n'.join(modern_times_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
+    
+    screen.blit(Lexington_bg, (0, 0))
+    Lexington_music.play(-1)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -241,8 +265,12 @@ def modern_times_screen(screen, font, text_color, screen_width, screen_height, c
 
 def mars_screen(screen, font, text_color, screen_width, screen_height, clock, mars_text_lines):
     global current_scene, player, enemy
-    screen.fill((0, 0, 0))
+    # screen.fill((0, 0, 0))
     mars_text = ScrollingText('\n'.join(mars_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
+    
+    screen.blit(AlienPlot_bg, (0, 0))
+    Mars_music.play(-1)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -257,6 +285,28 @@ def mars_screen(screen, font, text_color, screen_width, screen_height, clock, ma
         clock.tick(60)
     enemy = Alien()
 
+def outro_screen(screen, font, text_color, screen_width, screen_height, clock, text_lines):
+    global current_scene
+    intro_text = ScrollingText('\n'.join(text_lines), font, text_color, screen_width, screen_height, scroll_speed=2, line_spacing=180)
+    
+    screen.fill(, (0, 0, 0))
+    Outro_music.play(-1)
+
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        intro_text.update()
+        intro_text.draw(screen)
+        pygame.display.flip()
+        clock.tick(60)
+
+        if intro_text.is_finished():
+            current_scene = "main"
+            return
 
 def handle_battle_action():
     global battle_turn, current_scene, selected_action
@@ -335,16 +385,48 @@ def start_game():
     stone_age_bg = pygame.image.load("images/caveman-bg.jpg").convert()
     battle_bg = pygame.Surface((screen_width, screen_height))
     battle_bg.fill((128, 128, 128))  # Gray background for battle scene
+    medieval_time_bg = pygame.image.load("images/CastleBridge.jpg").convert()
+    red_district_bg = pygame.image.load("images/RedDistrict.jpg").convert()
+    Lexington_bg = pygame.image.load("images/Lexington.jpg").convert()
+    wwii_bg = pygame.image.load("images/WWII-soldier.jpg").convert()
+    Alien = pygame.image.load("images/Alien.jpg").convert()
+    AlienPlot = pygame.image.load("images/AlienPlot.jpg").convert()
 
     main_menu_image = pygame.transform.scale(main_menu_image, (screen_width, screen_height))
     intro_image = pygame.transform.scale(intro_image, (screen_width, screen_height))
     stone_age_bg = pygame.transform.scale(stone_age_bg, (screen_width, screen_height))
+    medieval_time_bg = pygame.transform.scale(medieval_time_bg, (screen_width, screen_height))
+    red_district_bg = pygame.transform.scale(red_district_bg, (screen_width, screen_height))
+    Lexington_bg = pygame.transform.scale(Lexington_bg, (screen_width, screen_height))
+    wwii_bg = pygame.transform.scale(wwii_bg, (screen_width, screen_height))
+    Alien = pygame.transform.scale(Alien, (screen_width, screen_height))
+    AlienPlot = pygame.transform.scale(AlienPlot, (screen_width, screen_height))
+
 
     # Load sounds
-    intro_music = pygame.mixer.Sound("Ambience/ObservingTheStar.ogg")
-    stone_age_music = pygame.mixer.Sound("Ambience/caveman-bg.ogg")
-    battle_music = pygame.mixer.Sound("Ambience/ST_1_Fight(wave).wav")
-    club_hit_sound = pygame.mixer.Sound('Sounds/CyclosporaSFX/Bonk Sound Effect.mp3')
+    try:
+        intro_music = pygame.mixer.Sound("Ambience/ObservingTheStar.ogg")
+        stone_age_music = pygame.mixer.Sound("Ambience/caveman-bg.ogg")
+        battle_music = pygame.mixer.Sound("Ambience/ST_1_Fight(wave).wav")
+        club_hit_sound = pygame.mixer.Sound('Sounds/CyclosporaSFX/Bonk Sound Effect.mp3')
+        castle_music = pygame.mixer.Sound("Ambience/Alert! Outsider!.mp3")
+        knight_music = pygame.mixer.Sound("Ambience/ST_1_Fight(mp3^320).mp3")
+        red_district_music = pygame.mixer.Sound("Ambience/Socapex - Tokyo Chase.mp3")
+        Ninja_music = pygame.mixer.Sound("Ambience/Theme of &#039;&#039;Ninja of A Great Sausage&#039;&#039;.ogg")
+        Lexington_music = pygame.mixer.Sound("Ambience/civil-war-fanfares.mp3")
+        Concord_soldier_music = pygame.mixer.Sound("Ambience/battle-march-action-loop.mp3")
+        wwii_music = pygame.mixer.Sound("Ambience/warzone.mp3")
+        Soldier_music = pygame.mixer.Sound("Ambience/Soldier.mp3")
+        Mars_music = pygame.mixer.Sound("Ambience/Zander Noriega - Perpetual Tension.mp3")
+        Alien_music = pygame.mixer.Sound("Ambience/Orbital Colossus.mp3")
+        outro_music = pygame.mixer.Sound("Ambience/Desperation sets in.mp3")
+
+        # Load background music
+        pygame.mixer.music.load("Ambience/ObservingTheStar.ogg")
+        pygame.mixer.music.play(-1)
+
+    except pygame.error as e:
+        print(f"Error loading sound files: {e}")
 
     # Scene Data
     scenes = {
@@ -397,21 +479,22 @@ def start_game():
        "text_lines": [
     "(Your head is pounding and your arms and legs are aching)"
     "Damn it...(You hold your head in your hands)"
-    "(As you lay in pain from the unexpected battle, the sound of metal clanging together gets louder and louder)"
+    "(As you take a breathe in, you immediately start to feel sick)",
+    "(You lean over to the side of a cobblestone ledge and vomit)",
+    'That taste just as bad as it did when I ate that pie', 
+    "(Wiping off the sides of your mouth, the sound of metal clanging together gets louder and louder)"
     "HARK!! Who goes there?!"
-    "(You hurriedly stand up and adrenaline courses through you're veins. As you look around, you notice your in some medieval era)"
-    "Please, not again"
-    ],
+
        "background": medieval_time_bg,
             "music": medieval_time_music,
             "enemy": "Knight"
     },
     "reddistrict": {
         "text_lines": [
-        "WHY IS THIS HAPPENING TO ME?!"
-        "(You start trembling with anger and feelings of helplessness...)"
-        "Where am I now?!"
-        "(YOu hear a commotion to your left and see  Geisha in the midst of a crowd walking , almost like a parade)"
+        "WHY IS THIS HAPPENING TO ME?!",
+        "(You start trembling with anger and feelings of helplessness...)",
+        "Where am I now?!",
+        "(You hear a commotion to your left and see  Geisha in the midst of a crowd walking , almost like a parade)"
         "(The lights start turning on and the sun is setting, you realize it's getting dark out)"
         "Crap, gotta find somewhere to sleep"
         "(You wonder the district and see food vendors and the area becoming livelier)"
@@ -422,20 +505,20 @@ def start_game():
         "(You gaze to see what she's fretting about. As you try to see where your gaze ends, you realize it's the weapons you've collected along the way. )"
         "(You're shocked, and start explaining that you mean no harm, but fail)"
         "(Some person you can only describe as a stereotypical ninja approaches you with sword drawn.)"
-        "(You quickly put your weapon away, back up and sheathe it and apologize profusely to the lady and wander away from the body you just left in the street.)"
-        "(After panic walking away from the murder you just committed. You find another vender and ask about a nearby inn. She seems to understand and points you in the direction of an Inn)"
-        "(You thank her and start walking towards the Inn, as you walk you begin to feel light-headed and blackout again.)" 
-    ],
+
         "background": reddistrict_bg,
             "music": reddistrict_music,
             "enemy": "Ninja"
     },
     "wwii": {
     "text_lines": [
-        "(You awake and look around, you notice a city-scape bombed to a point it resembled rubble more than a city.)"
-        "Halt! You there!"
-        "(You stop and slowly turn around)"
-        "(You are face to face with a Nazi soldier, obviously there isn't much to say at this point, you look to your right and find a discarded rifle, pick it up and point)"
+        "(You awake and look around, you notice plains of grass and tents vicarously placed on the end that you're in and the opposite end.)",
+        'I must have passed out from the pain',
+        "Concord Militiaman: 'Halt! Who goes there? State your business on this land, or prepare to face the consequences!'",
+        "(You stop and slowly turn around)",
+        "(You are face to face with a Concord militiaman.)",
+        "'...guns...'",
+        "(You need too tread carefully or there will be a bullet between your eyes.)"
     ],
     "backround": wwii_bg,
     "music": wwii_music,
@@ -443,20 +526,16 @@ def start_game():
     },
     "modern_times": {
       "text_lines": [
-        "(Well, that one doesn't feel quite like murder as the previous ones."
-        "That was a pretty easy choice.)"
-        "(You begin to look around, you debate just laying down and waiting"
-        "(But you're just guessing at this point.)"
-        "Oh there's the sleepy."
-        "You fall asleep"
-        "(You awaken to the sound of cars and people talking)"
-        "(You look around and realize you're in a modern city)"
-        "Where am I now?"
-        "(You see a soldier patrolling the street)"
-        "Hey, you! Stop right there!"
-        "(You realize you're just a dude holding a bunch of weapons)"
-        "Somewhere in the middle of what appears to be the United Kingdom." 
-        "They don't like guns and obviously do not like you right now.)"
+        "(You start to panic and ponder, if wherever you landed will be changed from the history you know or if it remains the same)"
+        "(You look around and you notice a city-scape, bombed to a point it resembled rubble more than a city)"
+        "Where am I now?'"
+        "(You see a soldier patrolling the area)"
+        "Soldier: 'Hey! This is no place for you! Get to safety, now!'"
+        "(You realize you are in another battlezone and start to panic.)"
+        'Wooah...I just need some help...'
+        "(The soldier you believe is American due to the uniform they have on.)"
+        "Soldier: 'Identify yourself! What are you doing here? You better have a good reason, or you'll be answering to the higher-ups.'"
+        'Okay what do I do now?...'
     ],
     "backround": modern_bg,
     "music": modern_time_music,
@@ -464,15 +543,44 @@ def start_game():
     },
     "mars": {
     "text_lines": [
-        "Well, guess I'm just a murderer now with some kind of berry monster helping me commit more crimes in various ages."
-        "(You begin to wander off attempting to hide somewhere not in the middle of the street. You find yourself wandering down an alley.)"
-        "(At the end of the alley, a bright light suddenly bursts out of the wall. It resembles a portal that you would see in Star Trek or something else sci-fi.)"
-        "Well guess I really don't have much to lose now."
-        "(You reload your rifle, take a look around and walk through the portal.)"
+       "(As you wake up, you feel cold metal on the backside of your entire body)",
+        "(Your gaze is met with what you believe to be an Alien)",
+        "Alien: 'Awaken, human. You are now part of the great harvest. Your existence will contribute to the advancement of our species. Resistance is futile. Accept your fate.'",
+        "(You scramble to your feet)",
+        'What is going on?!',
+        "Alien: 'Do not attempt to resist. Your kind has brought this upon yourselves. In the future, humans initiated a genocide against my people. I lost my arms in that war. Now, you will pay for your crimes.'",
+        "(You feel a surge of panic but try to think of a way out.)",
+        'Genocide? I... I had no idea. There must be another way. I can help you without... without this.',
+        "(The Alien's eyes narrow, filled with anger and pain.)",
+        "Alien: 'Help?! You are the one that needs help! Aren't You wondering about the pain and circumstances that you are experiencing?'",
+        "(The alien laughs)",
+        'Well why am I here then?',
+        "Alien: 'We are harvesting your kind to help restore ours. The parasites that were on the berries, have the ability to travel through time, hence you being here.'",
+        "What? then how did the parasites get there if what we did was in the future and I'm in the past?",
+        "Alien: 'As we foraged the planet for resources this parasite was of your planet once, but it had arrived on a meteor. It had evolved to survive the travel in space'",
+        "Alien: 'We took it as an opportunity to go back in time after ingesting it. We failed many times'",
+        "Alien: 'But grew closer and closer to success. The spread of the coronavirus wasn't as successful as we'd hoped. We had scraped virus outbreaks from the plan.'",
+        "Alien: 'So why not use the parasite as we have been, to get revenge, to be the catalyst of our plight? Evidently ingesting this parasite for you humans has volatile symptoms.'",
+        'What do you mean?',
+        "Alien: 'Well the time travel being one of them, although it doesn't really matter how or if you humans got to us or died beforehand. The less of you vermin, the better'",
+        "(You crouch once more, the pain is getting worse by the minute)",
+        "Alien: 'Well, I better harvest you whilst I can, The parasites love human flesh and the only way to kill it is by drinking our blood and even though it would give me time to harvest you, I'd rather you be in as much pain as possible'",
+        "(The alien is getting ready to probe you, what shall you do?)"
     ],
     "backround": modern_bg,
     "music": mars_music,
     "enemy": "Alien"
+    },
+
+        "outro": {
+    "text_lines": [
+        "(No longer do you feel cold metal but soft sheets and cushions, You jolt up)"
+        "Oh my god....I'm back home"
+        "(You start getting up, relieved. As you make your way to the bedroom door and into the hallway.)"
+        "(CRASH!!......SCREACH!!)"
+        "(CYCLOSPORA)"
+    ],
+    "music": outro_music
     }
     }
 
