@@ -135,7 +135,7 @@ def stone_age_screen(screen, font, text_color, screen_width, screen_height, cloc
     selected_action = 0
     battle_turn = "player"
 
-    # screen.blit(stone_age_bg, (0, 0))
+    screen.blit(stone_age_bg, (0, 0))
     stone_age_music.play(-1)
 
 
@@ -431,25 +431,25 @@ def start_game():
         "intro": {
         "text_lines": [
             "Cyclospora",
-            "In recent events, there has been an outbreak.",
-            "A parasitic contamination of our local berries",
-            "including; blueberries, raspberries, blackberries and strawberries",
-            "Ugh, I'm starving....",
-            "What's in the fridge?",
+            "(News Anchor): In recent events, there has been an outbreak...",
+            "A parasitic contamination of our local berries including;"
+            "blueberries, raspberries, blackberries and strawberries",
+            "(You): Ugh, I'm starving....",
+            "(You): What's in the fridge?",
             "You walk into the kitchen and open the fridge",
-            "You see there's nothing to prepare for breakfast,",
-            "Well there's a boysenberry pie your neighbor brought over,",
+            "You see there's nothing to prepare for breakfast",
+            "there's a boysenberry pie your neighbor brought over",
             "that definitely looks older than a week",
-            "Well it's not the worst thing I've eaten...",
-            "I should at least try it to be respectful",
+            "(You): Well it's not the worst thing I've eaten...",
+            "(You): I should at least try it to be respectful",
             "As you munch on the pie, you remember the news and think...",
-            "Did the news say boysenberry?...",
-            "Meh. Should be fine.",
-            "(You've eaten the pie)",
-            "That wasn't too bad",
-            "Ugh, spoke too soon...",
+            "(You): Did the news say boysenberry?...",
+            "(You): Meh. Should be fine.",
+            "You've eaten the pie",
+            "(You): That wasn't too bad",
+            "(You): Ugh, spoke too soon...",
             "(Stomach starts bubbling and hurting)",
-            "ugh...I think I'll sleep it off...",
+            "(You): ugh...I think I'll sleep it off...",
             "You lay down..."
     ],
             "background": intro_image,
@@ -457,78 +457,89 @@ def start_game():
         },
     "stone_age": {
         "text_lines": [
-            "(There's an unfamiliar cold hard surface that you knew couldn't be you're bed)",
-            "Oww, my back...",
-            "(As you start adjusting yourself to your surroundings, You see foliage and start hearing loud noises you feel like you've heard in a movie)",
-            "What the....",
-            "(You shoot up and start scrambling around)",
-            "How did I get here?!",
-            "Am I dreaming?",
-            "(As you look around you see what you believe to be a man)",
-            "Excuse Me!",
-            "(He notices you and starts sprinting with explosive power towards you)"
+            "There's an unfamiliar cold hard surface that you knew couldn't be you're bed     ",
+            "(You): Oww, my back...",
+            "As you start adjusting yourself to your surroundings"
+            "You see foliage and start hearing loud noises you feel like you've heard in a movie",
+            "(You): What the....",
+            "You shoot up and start scrambling around",
+            "(You): How did I get here?!",
+            "(You): Am I dreaming?",
+            "As you look around you see what you believe to be a man",
+            "(You): Excuse Me!",
+            "He notices you and starts sprinting with explosive power towards you"
     ],
         "background": stone_age_bg,
             "music": stone_age_music,
     },
     "medieval_time": {
        "text_lines": [
-    "(Your head is pounding and your arms and legs are aching)"
-    "Damn it...(You hold your head in your hands)"
-    "(As you take a breathe in, you immediately start to feel sick)",
-    "(You lean over to the side of a cobblestone ledge and vomit)",
-    'That taste just as bad as it did when I ate that pie', 
-    "(Wiping off the sides of your mouth, the sound of metal clanging together gets louder and louder)"
-    "HARK!! Who goes there?!"
+    "Your head is pounding and your arms and legs are aching"
+    "(You): Damn it..."
+    "You hold your head in your hands"
+    "As you take a breathe in, you immediately start to feel sick",
+    "You lean over to the side of a cobblestone ledge and vomit",
+    '(You): That taste just as bad as it did when I ate that pie', 
+    "Wiping off the sides of your mouth, the sound of metal clanging together gets louder and louder"
+    "(Knight):HARK!! Who goes there?!"
 
        "background": medieval_time_bg,
             "music": castle_music,
     },
     "reddistrict": {
         "text_lines": [
-        "WHY IS THIS HAPPENING TO ME?!",
-        "(You start trembling with anger and feelings of helplessness...)",
-        "Where am I now?!",
-        "(You hear a commotion to your left and see  Geisha in the midst of a crowd walking , almost like a parade)"
-        "(The lights start turning on and the sun is setting, you realize it's getting dark out)"
-        "Crap, gotta find somewhere to sleep"
-        "(You wonder the district and see food vendors and the area becoming livelier)"
-        "(You're stomach still hurts from that pie you ate. But you feel an insatuated hunger)"
-        "Can I get some food please?(You ask a vendor, she clearly doesn't understand you)"
-        "Well damn..."
-        "Well maybe if I...(You start to rummage your pockets and pull out your wallet. The vendor starts to panic)"
-        "(You gaze to see what she's fretting about. As you try to see where your gaze ends, you realize it's the weapons you've collected along the way. )"
-        "(You're shocked, and start explaining that you mean no harm, but fail)"
-        "(Some person you can only describe as a stereotypical ninja approaches you with sword drawn.)"
+        "(You): WHY IS THIS HAPPENING TO ME?!",
+        "You start trembling with anger and feelings of helplessness...",
+        "(You): Where am I now?!",
+        "You hear a commotion to your left and see a Geisha,"
+        "in the midst of a crowd walking , almost like a parade"
+        "The lights start turning on and the sun is setting, you realize it's getting dark out"
+        "(You): Crap, gotta find somewhere to sleep"
+        "You wonder the district and see food vendors and the area becoming livelier"
+        "You're stomach still hurts from that pie you ate. But you feel an insatuated hunger"
+        "(You): Can I get some food please?(You ask a vendor, she clearly doesn't understand you)"
+        "(You): Well damn..."
+        "(You): Well maybe if I..."
+        "You start to rummage your pockets and pull out your wallet."
+        "The vendor starts to panic"
+        "You gaze to see what she's fretting about. As you try to see where your gaze ends,"
+        " you realize it's the weapons you've collected along the way."
+        "You're shocked, and start explaining that you mean no harm, but fail"
+        "Some person you can only describe as a stereotypical ninja approaches you with sword drawn."
 
         "background": red_district_bg,
             "music": red_district_music,
     },
     "wwii": {
     "text_lines": [
-        "(You awake and look around, you notice plains of grass and tents vicarously placed on the end that you're in and the opposite end.)",
-        'I must have passed out from the pain',
-        "Concord Militiaman: 'Halt! Who goes there? State your business on this land, or prepare to face the consequences!'",
-        "(You stop and slowly turn around)",
-        "(You are face to face with a Concord militiaman.)",
-        "'...guns...'",
-        "(You need too tread carefully or there will be a bullet between your eyes.)"
+        "You awake and look around, you notice plains of grass and",
+        "tents vicarously placed on the end that you're in and the opposite end.",
+        'You: I must have passed out from the pain',
+        "Concord Militiaman: 'Halt! Who goes there? State your business on this land,"
+        "or prepare to face the consequences!'",
+        "You stop and slowly turn around",
+        "You are face to face with a Concord militiaman.",
+        "'(You): ...guns...'",
+        "You need too tread carefully or there will be a bullet between your eyes."
     ],
     "backround": WWII_bg,
     "music": WWII_music,
     },
     "modern_times": {
       "text_lines": [
-        "(You start to panic and ponder, if wherever you landed will be changed from the history you know or if it remains the same)"
-        "(You look around and you notice a city-scape, bombed to a point it resembled rubble more than a city)"
-        "Where am I now?'"
-        "(You see a soldier patrolling the area)"
+        "You start to panic and ponder, if wherever you landed will be"
+        "changed from the history you know or if it remains the same"
+        "You look around and you notice a city-scape,"
+        "bombed to a point it resembled rubble more than a city"
+        "(You): Where am I now?'"
+        "You see a soldier patrolling the area"
         "Soldier: 'Hey! This is no place for you! Get to safety, now!'"
-        "(You realize you are in another battlezone and start to panic.)"
-        'Wooah...I just need some help...'
-        "(The soldier you believe is American due to the uniform they have on.)"
-        "Soldier: 'Identify yourself! What are you doing here? You better have a good reason, or you'll be answering to the higher-ups.'"
-        'Okay what do I do now?...'
+        "You realize you are in another battlezone and start to panic."
+        '(You): Wooah...I just need some help...'
+        "The soldier you believe is American due to the uniform they have on."
+        "Soldier: 'Identify yourself! What are you doing here?"
+        "Soldier: You better have a good reason, or you'll be answering to the higher-ups.'"
+        '(You): Okay what do I do now?...'
     ],
     "backround": Lexington_bg,
     "music": Soldier_music,
@@ -537,26 +548,45 @@ def start_game():
     "text_lines": [
        "(As you wake up, you feel cold metal on the backside of your entire body)",
         "(Your gaze is met with what you believe to be an Alien)",
-        "Alien: 'Awaken, human. You are now part of the great harvest. Your existence will contribute to the advancement of our species. Resistance is futile. Accept your fate.'",
+        "Alien: 'Awaken, human. You are now part of the great harvest."
+        "Alien: Your existence will contribute to the advancement of our species."
+        "Alien: Resistance is futile. Accept your fate.'",
         "(You scramble to your feet)",
-        'What is going on?!',
-        "Alien: 'Do not attempt to resist. Your kind has brought this upon yourselves. In the future, humans initiated a genocide against my people. I lost my arms in that war. Now, you will pay for your crimes.'",
+        'You: What is going on?!',
+        "Alien: 'Do not attempt to resist. Your kind has brought this upon yourselves."
+        "Alien: In the future, humans initiated a genocide against my people."
+        "Alien: I lost my arms in that war. Now, you will pay for your crimes.'",
         "(You feel a surge of panic but try to think of a way out.)",
-        'Genocide? I... I had no idea. There must be another way. I can help you without... without this.',
+        'You: Genocide? I... I had no idea. There must be another way."
+        "You: I can help you without... without this.',
         "(The Alien's eyes narrow, filled with anger and pain.)",
-        "Alien: 'Help?! You are the one that needs help! Aren't You wondering about the pain and circumstances that you are experiencing?'",
+        "Alien: 'Help?! You are the one that needs help!"
+        "Alien: Aren't You wondering about the pain and circumstances that you are experiencing?'",
         "(The alien laughs)",
-        'Well why am I here then?',
-        "Alien: 'We are harvesting your kind to help restore ours. The parasites that were on the berries, have the ability to travel through time, hence you being here.'",
-        "What? then how did the parasites get there if what we did was in the future and I'm in the past?",
-        "Alien: 'As we foraged the planet for resources this parasite was of your planet once, but it had arrived on a meteor. It had evolved to survive the travel in space'",
-        "Alien: 'We took it as an opportunity to go back in time after ingesting it. We failed many times'",
-        "Alien: 'But grew closer and closer to success. The spread of the coronavirus wasn't as successful as we'd hoped. We had scraped virus outbreaks from the plan.'",
-        "Alien: 'So why not use the parasite as we have been, to get revenge, to be the catalyst of our plight? Evidently ingesting this parasite for you humans has volatile symptoms.'",
-        'What do you mean?',
-        "Alien: 'Well the time travel being one of them, although it doesn't really matter how or if you humans got to us or died beforehand. The less of you vermin, the better'",
+        'You: Well why am I here then?',
+        "Alien: 'We are harvesting your kind to help restore ours."
+        "Alien: The parasites that were on the berries, have the ability to travel through time,"
+        "Alien: hence you being here.'",
+        "You: What? then how did the parasites get there if what we did was in the future and I'm in the past?",
+        "Alien: 'As we foraged the planet for resources this parasite was of your planet once,"
+        "Alien: but it had arrived on a meteor. It had evolved to survive the travel in space'",
+        "Alien: 'We took it as an opportunity to go back in time after ingesting it."
+        "Alien: We failed many times'",
+        "Alien: 'But grew closer and closer to success."
+        "Alien: The spread of the coronavirus wasn't as successful as we'd hoped."
+        "Alien: We had scraped virus outbreaks from the plan.'",
+        "Alien: 'So why not use the parasite as we have been, to get revenge,"
+        "Alien: to be the catalyst of our plight?"
+        "Alien: Evidently ingesting this parasite for you humans has volatile symptoms.'",
+        'You: What do you mean?',
+        "Alien: 'Well the time travel being one of them,"
+        "Alien: although it doesn't really matter how or if you humans got to us or died beforehand."
+        "Alien: The less of you vermin, the better'",
         "(You crouch once more, the pain is getting worse by the minute)",
-        "Alien: 'Well, I better harvest you whilst I can, The parasites love human flesh and the only way to kill it is by drinking our blood and even though it would give me time to harvest you, I'd rather you be in as much pain as possible'",
+        "Alien: 'Well, I better harvest you whilst I can,"
+        "Alien: The parasites love human flesh and the only way to kill it is by drinking our blood"
+        "Alien: And even though it would give me time to harvest you,"
+        "Alien: I'd rather you be in as much pain as possible'",
         "(The alien is getting ready to probe you, what shall you do?)"
     ],
     "backround": AlienPlot,
@@ -565,9 +595,6 @@ def start_game():
 
         "outro": {
     "text_lines": [
-        "(No longer do you feel cold metal but soft sheets and cushions, You jolt up)"
-        "Oh my god....I'm back home"
-        "(You start getting up, relieved. As you make your way to the bedroom door and into the hallway.)"
         "(CRASH!!......SCREACH!!)"
         "(CYCLOSPORA)"
     ],
