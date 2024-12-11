@@ -137,7 +137,7 @@ def stone_age_screen(screen, font, text_color, screen_width, screen_height, cloc
     battle_turn = "player"
     enemy = choose_enemy(current_scene)  # Initialize the enemy here
 
-    screen.blit(stone_age_bg, (0, 0))
+    # screen.blit(stone_age_bg, (0, 0))
     stone_age_music.play(-1)
 
 
@@ -155,9 +155,10 @@ def stone_age_screen(screen, font, text_color, screen_width, screen_height, cloc
                     execute_battle_action(selected_action)  # Call your battle action function
 
         stone_age_text.update()
-        screen.fill((0, 0, 0))
+        # screen.fill((0, 0, 0))
 
         # Render the battle screen within this scene
+        screen.blit(stone_age_bg, (0, 0))
         if not stone_age_text.is_finished():
             stone_age_text.draw(screen)
         else:
