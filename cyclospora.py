@@ -438,7 +438,7 @@ def start_game():
         "you realize it's the weapons you've collected along the way.)",
         "(Whoops, you try explaining that you mean no harm...)",
         "(It's pretty hard to prove that when you have weapons and blood on you.)",
-        "(Some person you can only describe as a stereotypical ninja"
+        "(Some person you can only describe as a stereotypical ninja",
         "approaches you with sword drawn.)",
     ],
         "background": red_district_bg,
@@ -452,7 +452,7 @@ def start_game():
         "(After panic walking away from the murder you just committed.",
         "You find another vender and ask about a nearby inn.",
         "She seems to understand and points you in the direction of an Inn)",
-        "(You thank her and start walking towards the Inn"
+        "(You thank her and start walking towards the Inn",
         "as you walk you begin to feel light-headed and blackout again.)",
         "(You awake and look around, you notice a city-scape..",
         "bombed to a point it resembled rubble more than a city.)",
@@ -467,29 +467,32 @@ def start_game():
     },
     "modern_times": {
       "text_lines": [
-        "(Well, that one doesn't feel quite like murder as the previous ones."
-        "That was a pretty easy choice.)"
-        "(You begin to look around, you debate just laying down and waiting"
-        "(But you're just guessing at this point.)"
-        "Oh there's the sleepy."
-        "You fall asleep"
-        "(You awaken to the sound of cars and people talking)"
-        "(You look around and realize you're in a modern city)"
-        "Where am I now?"
-        "(You see a soldier patrolling the street)"
-        "Hey, you! Stop right there!"
-        "(You realize you're just a dude holding a bunch of weapons)"
-        "Somewhere in the middle of what appears to be the United Kingdom." 
-        "They don't like guns and obviously do not like you right now.)"
+        "(Well, that one doesn't feel quite like murder as the previous ones.",
+        "That was a pretty easy choice.)",
+        "(You begin to look around, you debate just laying down and waiting",
+        "(But you're just guessing at this point.)",
+        "Oh there's the sleepy.",
+        "You fall asleep",
+        "(You awaken to the sound of cars and people talking)",
+        "(You look around and realize you're in a modern city)",
+        "Where am I now?",
+        "(You see a soldier patrolling the street)",
+        "Hey, you! Stop right there!",
+        "(You realize you're just a dude holding a bunch of weapons)",
+        "Somewhere in the middle of what appears to be the United Kingdom.",
+        "They don't like guns and obviously do not like you right now.)",
     ],
     "background": Lexington_bg,
     "music": Soldier_music,
     },
     "mars": {
     "text_lines": [
-        "Well, guess I'm just a murderer now with some kind of berry monster helping me commit more crimes in various ages.",
-        "(You begin to wander off attempting to hide somewhere not in the middle of the street. You find yourself wandering down an alley.)",
-        "(At the end of the alley, a bright light suddenly bursts out of the wall. It resembles a portal that you would see in Star Trek or something else sci-fi.)",
+        "Well, guess I'm just a murderer now..."
+        "Guess some kind of berry monster is helping me commit more crimes in various ages.",
+        "(You begin to wander off attempting to hide somewhere",
+        "not in the middle of the street. You find yourself wandering down an alley.)",
+        "(At the end of the alley, a bright light suddenly appears",
+        "It looks like a wall of light. It resembles a portal...",
         "Well guess I really don't have much to lose now.",
         "(You reload your rifle, take a look around and walk through the portal.)",
     ],
