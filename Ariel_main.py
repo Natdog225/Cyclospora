@@ -428,7 +428,7 @@ def wwii_screen(screen, font, text_color, screen_width, screen_height, clock, ww
     # screen.fill((0, 0, 0))
     wwii_text = ScrollingText('\n'.join(wwii_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
     
-    screen.blit(wwii_bg (0, 0))
+    screen.blit(WWII_bg (0, 0))
     wwii_music.play(-1)
 
     while True:

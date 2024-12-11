@@ -63,7 +63,7 @@ def load_scene(scene_name, screen, font, text_color, screen_width, screen_height
         text_color,
         screen_width,
         screen_height,
-        scroll_speed=1,
+        scroll_speed=2,
         line_spacing=180
     )
 
@@ -72,11 +72,9 @@ def load_scene(scene_name, screen, font, text_color, screen_width, screen_height
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN:
-                # Allow skipping the scrolling
-                return
 
         scrolling_text.update()
+        
         if background:
             screen.blit(background, (0, 0))  # Use the provided background image
         else:
@@ -86,6 +84,7 @@ def load_scene(scene_name, screen, font, text_color, screen_width, screen_height
         clock.tick(60)
 
         if scrolling_text.is_finished():
+            scrolling_text.y = screen_height
             return
         
 def choose_enemy(current_scene):
@@ -131,17 +130,16 @@ def stone_age_screen(screen, font, text_color, screen_width, screen_height, cloc
     # screen.fill((0, 0, 0))
     stone_age_text = ScrollingText('\n'.join(stone_age_text_lines), font, text_color, screen_width, screen_height, scroll_speed=1, line_spacing=180)
 
-    # Initialize battle variables within this scene
+    # Initialize battle variables
     battle_actions = ["Attack", "Run away", "Try to reason", "Do nothing"]
     selected_action = 0
     battle_turn = "player"
-    enemy = choose_enemy(current_scene)  # Initialize the enemy here
 
     # screen.blit(stone_age_bg, (0, 0))
     stone_age_music.play(-1)
 
 
-    while True:
+    while enemy.hp > 0:  # Battle loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -170,9 +168,8 @@ def stone_age_screen(screen, font, text_color, screen_width, screen_height, cloc
         pygame.display.flip()
         clock.tick(60)
 
-        if stone_age_text.is_finished() and enemy.hp <= 0:  # Check if enemy is defeated
-            current_scene = "medieval_time"
-            return
+    # Battle ended, move to the next scene
+    next_scene()
 
 def medieval_time_screen(screen, font, text_color, screen_width, screen_height, clock, medieval_time_text_lines):
     global current_scene
@@ -358,8 +355,8 @@ def next_scene():
     elif current_scene == "medieval_time" and enemy.hp <= 0:
         current_scene = "red_district"
     elif current_scene == "red_district" and enemy.hp <= 0:
-        current_scene = "wwii"
-    elif current_scene == "wwii" and enemy.hp <= 0:
+        current_scene = "WWII"
+    elif current_scene == "WWII" and enemy.hp <= 0:
         current_scene = "modern_times"
     elif current_scene == "modern_times" and enemy.hp <= 0:
         current_scene = "mars"
@@ -457,7 +454,6 @@ def start_game():
     ],
             "background": intro_image,
             "music": intro_music,
-            "enemy": None
         },
     "stone_age": {
         "text_lines": [
@@ -474,7 +470,6 @@ def start_game():
     ],
         "background": stone_age_bg,
             "music": stone_age_music,
-            "enemy": "Caveman"
     },
     "medieval_time": {
        "text_lines": [
@@ -487,8 +482,7 @@ def start_game():
     "HARK!! Who goes there?!"
 
        "background": medieval_time_bg,
-            "music": medieval_time_music,
-            "enemy": "Knight"
+            "music": castle_music,
     },
     "reddistrict": {
         "text_lines": [
@@ -507,9 +501,8 @@ def start_game():
         "(You're shocked, and start explaining that you mean no harm, but fail)"
         "(Some person you can only describe as a stereotypical ninja approaches you with sword drawn.)"
 
-        "background": reddistrict_bg,
-            "music": reddistrict_music,
-            "enemy": "Ninja"
+        "background": red_district_bg,
+            "music": red_district_music,
     },
     "wwii": {
     "text_lines": [
@@ -521,9 +514,8 @@ def start_game():
         "'...guns...'",
         "(You need too tread carefully or there will be a bullet between your eyes.)"
     ],
-    "backround": wwii_bg,
-    "music": wwii_music,
-    "enemy": "Nazi_soldier"
+    "backround": WWII_bg,
+    "music": WWII_music,
     },
     "modern_times": {
       "text_lines": [
@@ -538,9 +530,8 @@ def start_game():
         "Soldier: 'Identify yourself! What are you doing here? You better have a good reason, or you'll be answering to the higher-ups.'"
         'Okay what do I do now?...'
     ],
-    "backround": modern_bg,
-    "music": modern_time_music,
-    "enemy": "British_soldier"
+    "backround": Lexington_bg,
+    "music": Soldier_music,
     },
     "mars": {
     "text_lines": [
@@ -568,9 +559,8 @@ def start_game():
         "Alien: 'Well, I better harvest you whilst I can, The parasites love human flesh and the only way to kill it is by drinking our blood and even though it would give me time to harvest you, I'd rather you be in as much pain as possible'",
         "(The alien is getting ready to probe you, what shall you do?)"
     ],
-    "backround": modern_bg,
-    "music": mars_music,
-    "enemy": "Alien"
+    "backround": AlienPlot,
+    "music": battle_music,
     },
 
         "outro": {
@@ -622,10 +612,23 @@ def start_game():
                 current_scene = next_scene
         elif current_scene in scenes:
             load_scene(current_scene, screen, font, text_color, screen_width, screen_height, clock, **scenes[current_scene])
-            if scenes[current_scene]["enemy"]:
-                enemy = globals()[scenes[current_scene]["enemy"]]()
+            if current_scene == "stone_age":
+                enemy = Caveman()
+                stone_age_screen(screen, font, text_color, player, enemy, clock)
+            elif current_scene == "medieval_time":
+                enemy = Knight()
+            elif current_scene == "reddistrict":
+                enemy = Ninja()
+            elif current_scene == "WWII":
+                enemy = Nazi_Soldier()
+            elif current_scene == "modern_times":
+                enemy = British_Soldier()
+            elif current_scene == "mars":
+                enemy = Alien()
+            if enemy is not None:  # Check if an enemy was made
                 battle_music.play(-1)
                 battle_turn = "player"
+
                 # --- Battle Logic ---
                 while enemy.hp > 0:  # Battle loop
                     for event in pygame.event.get():
@@ -652,6 +655,9 @@ def start_game():
 
                 # Battle ended, move to the next scene
                 next_scene()
+                enemy = None
+            elif current_scene == "intro":  # Check if it's the intro scene
+                current_scene = "stone_age"
 
         # 3. Render
         screen.fill((0, 0, 0))  # Clear the screen with a black background

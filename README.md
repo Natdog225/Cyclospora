@@ -70,14 +70,14 @@ For Arch-based distributions, type:
 bash
 sudo pacman -S python
 
-##Verify the Installation:
+## Verify the Installation:
 
 * Open Terminal.
 
 * Type python3 --version and press Enter.
 
 * You should see the version of Python that you installed.
-##After Python installation
+## After Python installation
 
 Run the following Command
 * pip install pygame
@@ -94,7 +94,7 @@ Run the following Command
  * import os
   * * os.environ["SDL_AUDIODRIVER"] = "dummy"
    
-##Authors
+## Authors
 
 1. Nathan Wilson
 2. Donovan
