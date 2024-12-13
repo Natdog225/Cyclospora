@@ -272,7 +272,7 @@ def handle_battle_action():
 def execute_battle_action(action_index, battle_log):
     global battle_turn, current_scene
     if action_index == 0:
-        weapon = sword  # Example: use the club weapon
+        weapon = sword
         player.attack(enemy, weapon)
     elif action_index == 1:
         if random.random() < player.special["Luck"] * 0.1:
@@ -385,7 +385,8 @@ def start_game():
         },
     "stone_age": {
         "text_lines": [
-            "(There's an unfamiliar cold hard surface as you wake up)",
+            "(There's an unfamiliar cold hard surface"
+            "You feel it as you wake up confused)",
             "This couldn't be your bed...)",
             "Oww, my back...",
             "(As you start adjusting yourself to your surroundings"
@@ -394,7 +395,8 @@ def start_game():
             "(You shoot up and start scrambling around)",
             "How did I get here?!",
             "Am I dreaming?",
-            "(As you look around you see what you believe to be a man)",
+            "(As you look around you see... a man?"
+            "Or at least what you believe to be a man)",
             "Excuse Me!",
             "(He notices you and starts sprinting towards you)"
     ],
